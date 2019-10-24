@@ -1,4 +1,5 @@
 clc, close, clear
+addpath('helperLibrary');
 
 % vehicle properties SI units
 vp = struct();
@@ -17,6 +18,7 @@ vp.J = vp.J  - vp.mass*cross_matrix(vp.r32)*cross_matrix(vp.r32);
 a = cross(vp.r32, vp.gVect);
 a = a/norm(a);
 F = acos(dot(vp.r32, vp.gVect)/(norm(vp.r32)*norm(vp.gVect)));
+F = deg2rad(50);
 eta = cos(F/2);
 eps = a*sin(F/2);
 q21 = [eps;eta];
@@ -39,6 +41,9 @@ plot(t, qBody)
 
 figure
 plot(t, wBody)
+
+[phi, theta, psi] = quat2euler(qBody);
+plot_cube_motion(t(2)-t(1), phi, theta, psi, vp.edge);
 
 function [dy] = rigidBodyMotion(t, state, vp)
 
