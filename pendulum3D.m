@@ -24,12 +24,12 @@ eps = a*sin(F/2);
 q21 = [eps;eta];
 
 % initial state
-wBody = [0;0;0];
+wBody = deg2rad(0)*[1;1;1]/norm([1;1;1]);
 state0 = [q21; wBody];
 
 % propagate
 options = odeset('RelTol', 1e-8, 'AbsTol',1e-8);
-t_span = [0 10];
+t_span = [0 25];
 [t, y] = ode45(@rigidBodyMotion, t_span, state0, options, vp);
 
 % extract data
@@ -42,8 +42,9 @@ plot(t, qBody)
 figure
 plot(t, wBody)
 
-[phi, theta, psi] = quat2euler(qBody);
-plot_cube_motion(t(2)-t(1), phi, theta, psi, vp.edge);
+simMotion(t, qBody, vp.edge);
+% [phi, theta, psi] = quat2euler(qBody);
+% plot_cube_motion(t(2)-t(1), phi, theta, psi, vp.edge);
 
 function [dy] = rigidBodyMotion(t, state, vp)
 
