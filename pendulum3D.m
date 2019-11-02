@@ -1,4 +1,4 @@
-clc, close, clear
+clc, close all, clear all
 addpath('helperLibrary');
 addpath('simulink/Simulation');
 
@@ -19,7 +19,7 @@ plot(t, qBody)
 figure
 plot(t, wBody)
 
-%simMotion(t, qBody, vp.edge);
+simMotion(t, qBody, vp.edge);
 
 function [dy] = rigidBodyMotion(t, state, vp)
 

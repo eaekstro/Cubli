@@ -16,16 +16,18 @@ a = cross(vp.r32, vp.gVect);
 a = a/norm(a);
 F = acos(dot(vp.r32, vp.gVect)/(norm(vp.r32)*norm(vp.gVect)));
 F = deg2rad(50);
-eta = cos(F/2);
+eta = cos(F/2)
 eps = a*sin(F/2);
 qBody0 = [eps;eta];
 
 % initial state
-wBody0 = deg2rad(0)*[1;1;1]/norm([1;1;1]);
+wBody0 = deg2rad(15)*[1;1;1]/norm([1;1;1]);
 Hsys0 = vp.J*wBody0;
 state0 = [qBody0; wBody0];
 
 % sample time
 Ts = .01;
+eps = 1;
+
 
 sim('IntegratedSim.slx');
